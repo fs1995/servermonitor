@@ -1,0 +1,9 @@
+/*set the pie chart colors*/
+.ct-series-a .ct-slice-pie {
+  fill: red;
+  stroke: white;
+}
+.ct-series-b .ct-slice-pie {
+  fill: green;
+  stroke: white;
+}
