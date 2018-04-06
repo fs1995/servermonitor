@@ -1,7 +1,7 @@
 === ServerMonitor ===
 Contributors: fs1995
 Donate link: https://paypal.me/fs1995
-Tags: server info, system monitor, sysmon, resource usage, disk usage, disk space, memory use, php error log, debug, monitor
+Tags: server info, system monitor, disk usage, disk space, memory, php error log, information, debug, monitor, phpinfo
 Requires at least: 3.4
 Tested up to: 4.9.5
 Requires PHP: 5.1.3
@@ -21,14 +21,15 @@ For any bug reports or suggestions, let me know in the plugins support forum.
 
 == Screenshots ==
 
-1. Resource use charts!
-2. PHP error log
+1. View resource usage in real time.
+2. View the PHP error log.
 3. Clear cache easily.
 
 == Changelog ==
 
 = 0.3.6 =
-*Release Date - Apr, 2018*
+*Release Date - Apr 6, 2018*
 
 * Initial release. This plugin is a copy of my LW MWP Tools plugin, but with the platform specific features of that plugin removed, and new features to come soon.
 * Don't hardcode PHP error log location.
+* View phpinfo().

@@ -59,13 +59,17 @@ function servermonitor_monitor(){ //generate the resource monitor page
 }
 
 function servermonitor_info(){ //generate the resource monitor page
+  if(isset($_POST['servermonitor-phpinfo'])){
+    echo phpinfo();
+    exit;
+  }
   $servermonitor_uptime = floatval(file_get_contents('/proc/uptime')); //read uptime
   $servermonitor_uptime_secs = round(fmod($servermonitor_uptime, 60), 0); $servermonitor_uptime = (int)($servermonitor_uptime / 60);
   $servermonitor_uptime_mins = $servermonitor_uptime % 60; $servermonitor_uptime = (int)($servermonitor_uptime / 60);
   $servermonitor_uptime_hr = $servermonitor_uptime % 24; $servermonitor_uptime = (int)($servermonitor_uptime / 24);
   $servermonitor_uptime_days = $servermonitor_uptime;
 
-  echo "<div class=\"wrap\"><h1>System Information</h1>Hostname: ", gethostname(), "<br>Uptime: ", $servermonitor_uptime_days, " days, ", $servermonitor_uptime_hr, " hours, ", $servermonitor_uptime_mins, " minutes, ", $servermonitor_uptime_secs, " seconds.<br>Server IP: ", $_SERVER['SERVER_ADDR'], "<br>PHP version: ", phpversion(), "<br>Platform: ", PHP_OS,  "</div>";
+  echo "<div class=\"wrap\"><h1>System Information</h1>Hostname: ", gethostname(), "<br>Uptime: ", $servermonitor_uptime_days, " days, ", $servermonitor_uptime_hr, " hours, ", $servermonitor_uptime_mins, " minutes, ", $servermonitor_uptime_secs, " seconds.<br>Server IP: ", $_SERVER['SERVER_ADDR'], "<br>PHP version: ", phpversion(), "<br>Platform: ", PHP_OS,  "<br><br></div><form method=\"post\" action=\"\"><input type=\"submit\" name=\"servermonitor-phpinfo\" value=\"View phpinfo()\" /></form>";
 }
 
 function servermonitor_cache(){
