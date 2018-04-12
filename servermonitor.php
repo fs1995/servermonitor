@@ -26,13 +26,13 @@ function servermonitor_readlog($file){
       if(is_readable($file)){
         return "Reading file: ".$file."<hr>".file_get_contents($file);
       }else{
-        return "Error: The file ".$file." is not readable. Please report this <a href=\"https://wordpress.org/support/plugin/servermonitor\" target=\"_blank\">here</a>.";
+        return "Error: The file ".$file." is not readable.";
       }
     }else{
       return "The file ".$file." is empty.";
     }
   }else{
-    return "Error: The file ".$file." does not exist. Please report this <a href=\"https://wordpress.org/support/plugin/servermonitor\" target=\"_blank\">here</a>.";
+    return "Error: The file ".$file." does not exist.";
   }
 }
 
