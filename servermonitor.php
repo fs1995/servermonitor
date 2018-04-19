@@ -17,7 +17,7 @@ if (PHP_OS === "Linux")
   $is_linux = 1;
 if(!$is_linux){ //If not on Linux
   delete_option('servermonitor_update_interval'); //then cleanup db entry,
-  exit("Currently ServerMonitor only supports the Linux Platform. Your detected platform is: " . PHP_OS . ". You can request support for this platform in the plugin support forum, and if I get enough requests, it may be added in a future update."); //and prevent plugin from activating.
+  exit("ServerMonitor only supports the Linux Platform. Your detected platform is: " . PHP_OS . ". You can request support for this platform in the plugin support forum."); //and prevent plugin from activating.
 }
 
 function servermonitor_readlog($file){
@@ -41,10 +41,11 @@ add_action('wp_ajax_servermonitor_monitorajax', 'servermonitor_monitorajax'); //
 
 function servermonitor_menu(){ //create the plugins menu
   add_menu_page('ServerMonitor', 'ServerMonitor', 'manage_options', 'servermonitor',  'servermonitor_monitor', 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAzMCI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTExLjkyIDMuMzhMOC44OCA5LjI1bC0yLjQgNC43N0gzLjMxYy0yLjg2IDAtMy4zMS4yMS0zLjMxIDEuMTIgMCAxLjAxLjQ4IDEuMiAzLjQ3IDEuMiAyLjU4IDAgNC4xMy4wNSA0LjMyLS4xOS4xNi0uMTYgMS4zNi0yLjY5IDIuNTYtNC45YTIwLjMyIDIwLjMyIDAgMCAxIDIuMTMtMy45MmwxLjI1IDYuNTMgMS43NCA5LjA3Yy43NCAzLjk0IDEuMDYgNC43NyAxLjYgNC43Ny4xMyAwIC41Ni0uNDUgMS4wOS0xLjM5LjUzLS45MyAxLjI4LTIuNDUgMi4xOS00LjMyTDIzIDE2LjM0bDMuMi0uMDNjMy4zNC0uMDIgMy43OS0uMSAzLjc5LTEuMTQgMC0xLjA3LS40LTEuMDctNC4wNS0xLjA3LTIuNTYgMC0zLjY4LS4xMy00LjA4LjEzLS4yNy4yMi0xLjIgMi0yLjE0IDMuODdhMzUuODIgMzUuODIgMCAwIDEtMiA0LjE5Yy0uMSAwLS4zMi0xLjM0LS40Mi0xLjk4LS4xNi0uOTgtLjg2LTQuNjEtMi45MS0xNS4xMi0uNS0yLjY2LS42Ny0zLjA2LTEuMTUtMy4xNC0uNDItLjA2LS43Mi4yNC0xLjMgMS4zM3oiLz48L3N2Zz4=');
-  add_submenu_page ('servermonitor', 'Server Resource Monitor', 'Resource Monitor', 'manage_options', 'servermonitor', 'servermonitor_monitor');
-  add_submenu_page ('servermonitor', 'System Information', 'System Info', 'manage_options', 'servermonitor-info', 'servermonitor_info');
-  add_submenu_page ('servermonitor', 'Clear cache', 'Clear cache', 'manage_options', 'servermonitor-cache', 'servermonitor_cache');
-  add_submenu_page ('servermonitor', 'PHP error log', 'PHP error log', 'manage_options', 'servermonitor-php', 'servermonitor_php');
+  add_submenu_page('servermonitor', 'Server Resource Monitor', 'Resource Monitor', 'manage_options', 'servermonitor', 'servermonitor_monitor');
+  add_submenu_page('servermonitor', 'System Information', 'System Info', 'manage_options', 'servermonitor-info', 'servermonitor_info');
+  add_submenu_page('servermonitor', 'Security Center', 'Security Center', 'manage_options', 'servermonitor-security', 'servermonitor_security');
+  add_submenu_page('servermonitor', 'Clear cache', 'Clear cache', 'manage_options', 'servermonitor-cache', 'servermonitor_cache');
+  add_submenu_page('servermonitor', 'PHP error log', 'PHP error log', 'manage_options', 'servermonitor-php', 'servermonitor_php');
 
   add_action('admin_init', 'register_servermonitor_settings');
 }
@@ -70,6 +71,10 @@ function servermonitor_info(){ //generate the resource monitor page
   $servermonitor_uptime_days = $servermonitor_uptime;
 
   echo "<div class=\"wrap\"><h1>System Information</h1>Hostname: ", gethostname(), "<br>Uptime: ", $servermonitor_uptime_days, " days, ", $servermonitor_uptime_hr, " hours, ", $servermonitor_uptime_mins, " minutes, ", $servermonitor_uptime_secs, " seconds.<br>Server IP: ", $_SERVER['SERVER_ADDR'], "<br>PHP version: ", phpversion(), "<br>Platform: ", PHP_OS,  "<br><br></div><form method=\"post\" action=\"\"><input type=\"submit\" name=\"servermonitor-phpinfo\" value=\"View phpinfo()\" /></form>";
+}
+
+function servermonitor_security(){
+  echo "<div class=\"wrap\"><h1>Security Center</h1>Coming soon!</div>";
 }
 
 function servermonitor_cache(){
